@@ -1,0 +1,29 @@
+// problem on map data structure
+
+bool isStraightHand(int n, int groupSize, std::vector<int>& hand) {
+        if (n % groupSize != 0) {
+            return false;
+        }
+        
+        map<int, int> m;
+        
+        for (auto x : hand) {
+            m[x]++;
+        }
+        
+        for (auto pair:m) {
+            int val = pair.first;
+            int fre = pair.second;
+            
+            if(fre>0){
+                for(int i=val; i<val+groupSize; i++){
+                    if(m[i] && m[i]>=fre){
+                        m[i]-=fre;
+                    }
+                    else return false;
+                }
+            }
+            
+        }
+        return true;
+    }
