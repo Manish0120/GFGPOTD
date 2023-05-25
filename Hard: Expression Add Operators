@@ -1,0 +1,42 @@
+// Hard Problem on recursion and baktracking
+
+
+
+vector<string> res;
+    void solve(string S, int target, int i, int n, const string ans, long long X1, long long X2){
+        if (i == n){
+            if (X1 == target)
+                res.push_back(ans);
+            return;
+        }
+        
+        for(int j=i; j<n; j++){
+            if (j > i && S[i] == '0')
+                break;
+            
+            string str = S.substr(i, j-i+1);
+            
+            // do use long long as datatype for firstPart and stoll() for typecasting else it will need more memory
+            // to store the data and lead to runtime error.
+            
+            // Because later on operations are being performed with long long X1, X2 of firstPart therefore needed to be long long datatype.
+            
+            long long firstPart = stoll(str);
+            
+            if(i==0){
+                 solve(S, target, j+1, n, ans+str, X1+firstPart, firstPart);
+            }
+            else{
+                solve(S, target, j+1, n, ans+"+"+str, X1+firstPart, firstPart);
+                solve(S, target, j+1, n, ans+"-"+str, X1-firstPart, -firstPart);
+                solve(S, target, j+1, n, ans+"*"+str, X1 - X2 + X2 * firstPart, X2 * firstPart);
+            }
+        }
+        return ;
+    }
+
+    vector<string> addOperators(string S, int target) {
+        
+        solve(S, target, 0, S.size(), "", 0, 0);
+        return res;
+    }
