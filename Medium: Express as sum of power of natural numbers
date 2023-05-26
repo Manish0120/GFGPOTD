@@ -1,0 +1,29 @@
+// DP Question
+
+
+
+private:
+    int mod = 1000000007;
+    int solve(int n, int x, int i, int limit, vector<vector<int>> &dp){
+        if(0==n) return 1;
+        if(n<0) return 0;
+        if(i>limit) return 0;
+        if(dp[i][n]!=-1) return dp[i][n];
+        
+        int inc = solve(n-round(pow(i,x)), x, i+1, limit, dp);
+        int exc = solve(n, x, i+1, limit, dp);
+        dp[i][n] = (inc%mod + exc%mod)%mod;
+        return dp[i][n];
+        
+    }
+    
+    public:
+    int numOfWays(int n, int x){
+
+        double root = 1.0/x;
+        int limit = pow(n, root);
+        
+        vector<vector<int>> dp(limit+1, vector<int>(n+1,-1));
+        
+        return solve(n, x, 1, limit, dp);
+    }
