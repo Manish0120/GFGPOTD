@@ -1,0 +1,46 @@
+// Linked List
+
+
+struct Node* modifyTheList(struct Node *head){
+        Node* slow, *fast;
+        slow = fast = head;
+        
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        Node* prev, *curr, *next;
+        prev = NULL;
+        curr = slow;
+        
+        while(curr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        
+        Node* reverseHead = prev;
+        Node* frontHead = head;
+        
+        while(reverseHead && reverseHead!=frontHead){
+            
+            frontHead->data = reverseHead->data - frontHead->data;
+            reverseHead->data = reverseHead->data - frontHead->data;
+            frontHead = frontHead->next;
+            reverseHead = reverseHead->next;
+        }
+        
+        curr = prev;
+        prev = NULL;
+        
+        while(curr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        
+        return head;
+    }
