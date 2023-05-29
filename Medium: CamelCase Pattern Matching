@@ -1,0 +1,32 @@
+// Medium, String Operations
+
+
+class Solution {
+  public:
+    vector<string> CamelCase(int N, vector<string> Dictionary, string Pattern) {
+        vector <string> ans;
+        int len = Pattern.size();
+        for(int i=0; i<N; i++){
+            if(Dictionary[i].size()<len) continue;
+            int k=0;
+            for(int j=0; j<Dictionary[i].size(); j++){
+                if(k>=len){
+                    ans.push_back(Dictionary[i]);
+                    break;
+                }
+                if(Dictionary[i][j]<'a'){
+                    if(Dictionary[i][j]==Pattern[k]){
+                        k++;
+                    }
+                    else break;
+                }
+            }
+        }
+        
+        sort(ans.begin(), ans.end());
+        if(ans.size()==0){
+            ans.push_back("-1");
+        }
+        return ans;
+    }
+};
