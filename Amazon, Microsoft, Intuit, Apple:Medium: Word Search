@@ -1,0 +1,43 @@
+// Graph DFS Traversal 
+// Medium
+
+
+
+   bool solve(vector<vector<char>>& board, vector<vector<int>> &vis, int i, int j, int n, int m, string word, int k){
+        if(k==word.size()) return true;
+        
+        vis[i][j] = 1;
+        
+        vector<int> row = {-1,1,0,0};
+        vector<int> col = {0,0,-1,1};
+        
+        for(int idx=0; idx<4; idx++){
+            int newrow = row[idx]+i;
+            int newcol = col[idx]+j;
+            
+            if(newrow>=0 && newrow<n && newcol>=0 && newcol<m && board[newrow][newcol]==word[k] && vis[newrow][newcol] == 0 && solve(board, vis, newrow, newcol, n, m, word, k+1)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool isWordExist(vector<vector<char>>& board, string word) {
+        
+        int n = board.size();
+        int m = board[0].size();
+        
+        
+        
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(word[0] == board[i][j]){
+                    vector<vector<int>> vis(n, vector<int> (m,0));
+                    if(solve(board, vis, i, j, n, m, word, 1)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
