@@ -1,3 +1,5 @@
+// Merge the intervals and then apply linear search to find the key number.
+
 class Solution{
     public:
     int ksmallest(int q, vector<vector<int>>&range, int n){
