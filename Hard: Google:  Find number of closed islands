@@ -1,3 +1,6 @@
+//  FIrst mark all those island as 0 which are having some part on the boundaries the calculate the closed Islands.
+
+
 Solution 1:
 
 class Solution {
