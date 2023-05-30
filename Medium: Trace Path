@@ -1,3 +1,7 @@
+// Find the Maximum rightmost, leftmost, downmost and upmost points and then check if they lie within the range or not.
+
+
+
 class Solution{
 public:
     int isPossible(int n, int m, string s){
