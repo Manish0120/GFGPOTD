@@ -1,4 +1,6 @@
-//Binary Tree Medium
+// Binary Tree Medium
+// Find the first node of preorder into reverse preorder and vice versa then make two parts of the array and build saperate binary trees.
+// Then add them as left and right subtrees of the given node.
 
 
 class Solution{
