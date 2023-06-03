@@ -1,0 +1,64 @@
+// Stack kind of quesstionn qithout using stack
+// precalculate the sum of of all the vectors and do the operations with repect to the minimum sum of all of them.
+
+
+// Solution 1
+int maxEqualSum(int N1,int N2,int N3,vector<int> &S1,vector<int> &S2,vector<int> &S3){
+        int sum1 = accumulate(S1.begin(), S1.end(), 0);
+        int sum2 = accumulate(S2.begin(), S2.end(), 0);
+        int sum3 = accumulate(S3.begin(), S3.end(), 0);
+        
+        int sum = min(sum1, min(sum2, sum3));
+        
+        reverse(S1.begin(), S1.end());
+        reverse(S2.begin(), S2.end());
+        reverse(S3.begin(), S3.end());
+        
+        while(true){
+            if(sum1>sum){
+                sum1 = sum1 - S1[S1.size()-1];
+                S1.pop_back();
+                sum = min(sum, sum1);
+            }
+            if(sum2>sum){
+                sum2 = sum2 - S2[S2.size()-1];
+                S2.pop_back();
+                sum = min(sum, sum2);
+            }
+            
+            if(sum3>sum){
+                sum3 = sum3 - S3[S3.size()-1];
+                S3.pop_back();
+                sum = min(sum, sum3);
+            }
+            
+            if(sum1 == sum2 && sum2 == sum3){
+                return sum;
+            }
+        }
+    }
+    
+    
+    
+    
+    // Solution 2
+    
+    int maxEqualSum(int N1,int N2,int N3,vector<int> &S1,vector<int> &S2,vector<int> &S3){
+        int sum1 = accumulate(S1.begin(), S1.end(), 0);
+        int sum2 = accumulate(S2.begin(), S2.end(), 0);
+        int sum3 = accumulate(S3.begin(), S3.end(), 0);
+        
+        int sum = min(sum1, min(sum2, sum3));
+        
+        int i=0,j=0,k=0;
+        while(!(sum1==sum2 && sum2==sum3)){
+            int sum=min(sum1,sum2);
+            sum=min(sum3,sum);
+             // decrement the sum which is greater sum then minimum value by the top element of its stack everytime
+            if(sum3>sum) sum3-=S3[k++];
+            if(sum2>sum) sum2-=S2[j++];
+            if(sum1>sum) sum1-=S1[i++];
+          
+        }
+        return sum1;
+    }
