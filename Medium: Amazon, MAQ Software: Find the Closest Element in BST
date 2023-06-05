@@ -1,0 +1,41 @@
+// BST, Binary Search
+
+
+
+	private:
+    
+    void solve(Node* root, int k, int &less, int &more){
+        if(root!=NULL){
+            if(root->data == k) {
+                less = k; more = k;
+            }
+            
+            if(root->data < k){
+                less = root->data;
+                if(root->right){
+                    solve(root->right, k, less, more);
+                }
+                
+                else return;
+            }
+            
+            if(root->data > k){
+                more = root->data;
+                if(root->left){
+                    solve(root->left, k, less, more);
+                }
+                else return;
+            }
+        }
+    }
+    
+    public:
+    
+    int minDiff(Node *root, int K){
+        int mini = 0;
+        int maxi = 0;
+        
+        solve(root, K, mini, maxi);
+        
+        return min(abs(K-mini), abs(K-maxi));
+    }
