@@ -1,0 +1,42 @@
+// BST 
+
+
+
+void solve(Node* root, int k, Node* &less, Node* &more){
+        if(root!=NULL){
+            if(root->key == k) {
+                solve(root->right, k, less, more);
+                solve(root->left, k, less, more);
+            }
+            
+            if(root->key < k){
+                less = root;
+                if(root->right){
+                    solve(root->right, k, less, more);
+                }
+                
+                else return;
+            }
+            
+            if(root->key > k){
+                more = root;
+                if(root->left){
+                    solve(root->left, k, less, more);
+                }
+                else return;
+            }
+        }
+    }
+    
+    public:
+    
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key){
+        
+        Node* less = NULL;
+        Node* more = NULL;
+        
+        solve(root, key, less, more);
+        
+        pre = less;
+        suc = more;
+    }
