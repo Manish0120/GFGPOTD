@@ -1,0 +1,21 @@
+// Use sieve of Eratosthenes
+
+
+
+vector<int> leastPrimeFactor(int n) {
+    vector<int> ans(n+1);
+    for(int i=0; i<=n; i++){
+        ans[i] = i;
+    }
+
+    for(int i=2; i<=pow(n, 0.5); i++){
+        if(ans[i]==i){
+            for(int j=2*i; j<=n; j+=i){
+                if(ans[j]==j){
+                    ans[j] = i;
+                }
+            }
+        }
+    }
+    return ans;
+}
