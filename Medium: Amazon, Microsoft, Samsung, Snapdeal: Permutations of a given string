@@ -1,0 +1,28 @@
+// Recursion , Backtracking
+
+
+
+class Solution
+{
+public:
+void solve(string S, set<string>&st, int index){
+    int n= S.size();
+    if(index>=n){
+        st.insert(S);
+        return ;
+    }
+    for( int i=index; i<n; i++){
+        swap(S[i], S[index]);
+        solve( S, st, index+1);
+        swap( S[i], S[index]);
+    }
+}
+vector<string>find_permutation(string S)
+{
+    set<string>st;
+    int index=0;
+    solve( S, st, index);
+     vector<string>ans(st.begin(), st.end());
+    return ans;
+}
+};
